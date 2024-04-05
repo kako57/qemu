@@ -289,7 +289,7 @@ static void ga_log(const gchar *domain, GLogLevelFlags level,
 #else
     if (level & s->log_level) {
 #endif
-        g_get_current_time(&time);
+        g_get_real_time();
         fprintf(s->log_file,
                 "%lu.%lu: %s: %s\n", time.tv_sec, time.tv_usec, level_str, msg);
         fflush(s->log_file);

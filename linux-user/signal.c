@@ -3416,7 +3416,7 @@ struct target_signal_frame {
 
 struct rt_signal_frame {
     siginfo_t info;
-    struct ucontext uc;
+    struct ucontext_t uc;
     uint32_t tramp[2];
 };
 
@@ -3627,7 +3627,7 @@ struct rt_signal_frame {
         siginfo_t *pinfo;
         void *puc;
         siginfo_t info;
-        struct ucontext uc;
+        struct ucontext_t uc;
         uint16_t retcode[4];      /* Trampoline code. */
 };
 
@@ -3924,7 +3924,7 @@ static void setup_rt_frame(int sig, struct target_sigaction *ka,
         tswap_siginfo(&frame->info, info);
     }
 
-    /*err |= __clear_user(&frame->uc, offsetof(struct ucontext, uc_mcontext));*/
+    /*err |= __clear_user(&frame->uc, offsetof(struct ucontext_t, uc_mcontext));*/
     __put_user(0, &frame->uc.tuc_flags);
     __put_user(0, &frame->uc.tuc_link);
     __put_user(target_sigaltstack_used.ss_sp,

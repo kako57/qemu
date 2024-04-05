@@ -91,7 +91,7 @@ def main(args):
         try:
             os.environ['QMP_PATH'] = path
             os.execvp(fullcmd, [fullcmd] + args)
-        except OSError, (errno, msg):
+        except OSError as (errno, msg):
             if errno == 2:
                 print 'Command "%s" not found.' % (fullcmd)
                 return 1
